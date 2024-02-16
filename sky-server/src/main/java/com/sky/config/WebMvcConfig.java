@@ -24,7 +24,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(adminLoginInterceptor).addPathPatterns("/admin/**")
+        registry.addInterceptor(adminLoginInterceptor)
+                .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/employee/login", "/admin/employee/logout", "/error"  //后台有异常，springBoot自己会发这个请求
         );
 
@@ -40,4 +41,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //将自己的消息转化器加入容器中
         converters.add(0, converter);
     }
+
 }
