@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.mapper.AddressBookMapper">
+
+    <insert id="save">
+        insert into address_book
+        (
+         user_id,
+         consignee,
+         sex,
+         phone,
+         province_code,
+         province_name,
+         city_code,
+         city_name,
+         district_code,
+         district_name,
+         detail,
+         label,
+         is_default
+        )
+        values
+        (
+         #{userId},
+         #{consignee},
+         #{sex},
+         #{phone},
+         #{provinceCode},
+         #{provinceName},
+         #{cityCode},
+         #{cityName},
+         #{districtCode},
+         #{districtName},
+         #{detail},
+         #{label},
+         #{isDefault}
+        )
+    </insert>
+    <update id="editById">
+        update address_book set
+            user_id = #{userId},
+            consignee = #{consignee},
+            sex = #{sex},
+            phone = #{phone},
+            province_code = #{provinceCode},
+            province_name = #{provinceName},
+            city_code = #{cityCode},
+            city_name = #{cityName},
+            district_code = #{districtCode},
+            district_name = #{districtName},
+            detail = #{detail},
+            label = #{label},
+            is_default = #{isDefault}
+            where id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  mvc:
+    pathmatch:
+      # Spring Boot 2.6.X使用的路径匹配是PathPatternMatcher
+      # swagger3.0开始底层Springfox使用的路径匹配是基于AntPathMatcher
+      matching-strategy: ant_path_matcher
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${sky.datasource.driver-class-name}
+      url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${sky.datasource.username}
+      password: ${sky.datasource.password}
+  redis:
+    password: 1234
+    port: 6379
+    host: localhost
+
+mybatis:
+  type-aliases-package: com.sky.entity
+  configuration:
+    # 开启驼峰命名规则映射  表 user_name  -> 实体类 userName
+    map-underscore-to-camel-case: true
+    # 控制台打印SQL日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+sky:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret: itcast
+    # 设置jwt过期时间(30分钟)
+    admin-ttl: 1800000
+    user-secret: itcast
+    user-ttl: 18000000
+    user-token-name: authentication
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    accessKeyId: LTAI5tEMwg8AFaT3q6bRiPqZ
+    accessKeySecret: JJ98eAqdU8RU2jmXc88q6xrJuf2c83
+    bucketName: sky-take-16
+  wechat:
+    appid: wxce44eebacd7ff90e
+    secret: 3fce5ae381511f66a30ca935d09dc333
+    mchid: 1561414331 # 商户号
+    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606 # 商户API证书的证书序列号
+    privateKeyFilePath: E:\JavaDevelop\take-out-web\nginx-1.20.2\apiclient_key.pem  # 商户私钥文件
+    weChatPayCertFilePath: E:\JavaDevelop\take-out-web\nginx-1.20.2\wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem # 微信支付证书文件路径
+    apiV3Key: CZBK51236435wxpay435434323FFDuv3 # 证书解密的密钥
+    notifyUrl: https://526c1908.r2.cpolar.top/notify/paySuccess # 支付成功的回调地址
+    refundNotifyUrl: https://526c1908.r2.cpolar.top/notify/refund # 退款成功的回调地址
