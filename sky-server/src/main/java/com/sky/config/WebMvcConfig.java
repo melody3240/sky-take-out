@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
+
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -23,19 +24,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(adminLoginInterceptor)
-                .addPathPatterns("/admin/**")
-                .excludePathPatterns("/admin/employee/login",
-                        "/admin/employee/logout",
-                        "/error"  //后台有异常，springBoot自己会发这个请求
-                );
+        registry.addInterceptor(adminLoginInterceptor).addPathPatterns("/admin/**").excludePathPatterns("/admin/employee/login", "/admin/employee/logout", "/error"  //后台有异常，springBoot自己会发这个请求
+        );
 
-        registry.addInterceptor(userLoginInterceptor)
-                .addPathPatterns("/user/**")
-                .excludePathPatterns(
-                        "/user/user/login",
-                        "/user/shop/status"
-                );
+        registry.addInterceptor(userLoginInterceptor).addPathPatterns("/user/**").excludePathPatterns("/user/user/login", "/user/shop/status");
     }
 
     @Override
@@ -45,6 +37,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //需要为消息转换器设置一个对象转换器，对象转换器可以将Java对象序列化为json数据
         converter.setObjectMapper(new JacksonObjectMapper());
         //将自己的消息转化器加入容器中
-        converters.add(0,converter);
+        converters.add(0, converter);
     }
 }
