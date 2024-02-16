@@ -24,7 +24,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(adminLoginInterceptor).addPathPatterns("/admin/**").excludePathPatterns("/admin/employee/login", "/admin/employee/logout", "/error"  //后台有异常，springBoot自己会发这个请求
+        registry.addInterceptor(adminLoginInterceptor).addPathPatterns("/admin/**")
+                .excludePathPatterns("/admin/employee/login", "/admin/employee/logout", "/error"  //后台有异常，springBoot自己会发这个请求
         );
 
         registry.addInterceptor(userLoginInterceptor).addPathPatterns("/user/**").excludePathPatterns("/user/user/login", "/user/shop/status");
